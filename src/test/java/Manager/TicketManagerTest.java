@@ -1,11 +1,9 @@
 package Manager;
 
 import Domain.Ticket;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -41,17 +39,15 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(sochi6);
 
 
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi");
+        Ticket[] expected = new Ticket[]{sochi5, sochi3, sochi, sochi6, sochi4};
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo","Sochi");
-        Ticket[] expected = new Ticket[]{sochi5,sochi3,sochi, sochi6,sochi4};
-
-        Arrays.sort(actual);
         assertArrayEquals(actual, expected);
 
     }
 
     @Test
-    void searchAllByFromAndToNoMatch(){
+    void searchAllByFromAndToNoMatch() {
         TicketManager ticketManager = new TicketManager();
         Ticket kazan = new Ticket(2, 16500, "Domodedovo", "Kazan", 180);
         Ticket simpheropol = new Ticket(3, 15500, "Sheremetevo", "Simpheropol", 150);
@@ -69,14 +65,15 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(simpheropol2);
         ticketManager.ticketRepository.save(vladivostok2);
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo","Sochi");
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi");
         Ticket[] expected = new Ticket[]{};
 
-        Arrays.sort(actual);
+
         assertArrayEquals(actual, expected);
     }
+
     @Test
-    void searchAllByFromAndToOneMatch(){
+    void searchAllByFromAndToOneMatch() {
         TicketManager ticketManager = new TicketManager();
         Ticket kazan = new Ticket(2, 16500, "Domodedovo", "Kazan", 180);
         Ticket simpheropol = new Ticket(3, 15500, "Sheremetevo", "Simpheropol", 150);
@@ -94,10 +91,10 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(simpheropol2);
         ticketManager.ticketRepository.save(vladivostok2);
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Domodedovo","Sochi");
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Domodedovo", "Sochi");
         Ticket[] expected = new Ticket[]{sochi2};
 
-        Arrays.sort(actual);
+
         assertArrayEquals(actual, expected);
     }
 }

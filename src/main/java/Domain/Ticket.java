@@ -14,12 +14,6 @@ public class Ticket implements Comparable<Ticket> {
         this.to = to;
         this.timeFly = timeFly;
     }
-    public boolean matches(String search) {
-        if (matches(search)) {
-            return true;
-        }
-        return false;
-    }
 
 
     public int compareTo(Ticket o) {
