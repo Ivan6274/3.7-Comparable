@@ -48,6 +48,56 @@ class TicketManagerTest {
         Arrays.sort(actual);
         assertArrayEquals(actual, expected);
 
+    }
 
+    @Test
+    void searchAllByFromAndToNoMatch(){
+        TicketManager ticketManager = new TicketManager();
+        Ticket kazan = new Ticket(2, 16500, "Domodedovo", "Kazan", 180);
+        Ticket simpheropol = new Ticket(3, 15500, "Sheremetevo", "Simpheropol", 150);
+        Ticket vladivostok = new Ticket(4, 32500, "Vnukovo", "Vladivostok", 480);
+        Ticket sochi2 = new Ticket(5, 13500, "Domodedovo", "Sochi", 120);
+        Ticket kazan2 = new Ticket(6, 14500, "Vnukovo", "Kazan", 190);
+        Ticket simpheropol2 = new Ticket(7, 160000, "Domodedovo", "Simpheropol", 140);
+        Ticket vladivostok2 = new Ticket(8, 33500, "Sheremetevo", "Vladivostok", 450);
+
+        ticketManager.ticketRepository.save(kazan);
+        ticketManager.ticketRepository.save(simpheropol);
+        ticketManager.ticketRepository.save(vladivostok);
+        ticketManager.ticketRepository.save(sochi2);
+        ticketManager.ticketRepository.save(kazan2);
+        ticketManager.ticketRepository.save(simpheropol2);
+        ticketManager.ticketRepository.save(vladivostok2);
+
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo","Sochi");
+        Ticket[] expected = new Ticket[]{};
+
+        Arrays.sort(actual);
+        assertArrayEquals(actual, expected);
+    }
+    @Test
+    void searchAllByFromAndToOneMatch(){
+        TicketManager ticketManager = new TicketManager();
+        Ticket kazan = new Ticket(2, 16500, "Domodedovo", "Kazan", 180);
+        Ticket simpheropol = new Ticket(3, 15500, "Sheremetevo", "Simpheropol", 150);
+        Ticket vladivostok = new Ticket(4, 32500, "Vnukovo", "Vladivostok", 480);
+        Ticket sochi2 = new Ticket(5, 13500, "Domodedovo", "Sochi", 120);
+        Ticket kazan2 = new Ticket(6, 14500, "Vnukovo", "Kazan", 190);
+        Ticket simpheropol2 = new Ticket(7, 160000, "Domodedovo", "Simpheropol", 140);
+        Ticket vladivostok2 = new Ticket(8, 33500, "Sheremetevo", "Vladivostok", 450);
+
+        ticketManager.ticketRepository.save(kazan);
+        ticketManager.ticketRepository.save(simpheropol);
+        ticketManager.ticketRepository.save(vladivostok);
+        ticketManager.ticketRepository.save(sochi2);
+        ticketManager.ticketRepository.save(kazan2);
+        ticketManager.ticketRepository.save(simpheropol2);
+        ticketManager.ticketRepository.save(vladivostok2);
+
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Domodedovo","Sochi");
+        Ticket[] expected = new Ticket[]{sochi2};
+
+        Arrays.sort(actual);
+        assertArrayEquals(actual, expected);
     }
 }
