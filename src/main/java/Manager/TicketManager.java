@@ -17,7 +17,7 @@ public class TicketManager {
 
     }
 
-    public Ticket[] searchAllByFromAndTo(String from, String to) {
+    public Ticket[] searchAllByFromAndTo(String from, String to, Comparator comparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : ticketRepository.findAll()) {
             if (matches(ticket, from) && matches(ticket,to)) {
@@ -25,7 +25,7 @@ public class TicketManager {
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
-                Comparator comparator = new FlyTimeComrparator();
+                comparator = new FlyTimeComrparator();
                 Arrays.sort(result, comparator);
             }
 

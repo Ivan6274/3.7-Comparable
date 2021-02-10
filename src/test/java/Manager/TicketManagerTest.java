@@ -1,9 +1,12 @@
 package Manager;
 
+
 import Domain.Ticket;
 
 import org.junit.jupiter.api.Test;
 
+
+import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -39,7 +42,7 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(sochi6);
 
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi");
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi", Comparator.naturalOrder());
         Ticket[] expected = new Ticket[]{sochi5, sochi, sochi3, sochi6, sochi4};
 
         assertArrayEquals(actual, expected);
@@ -65,7 +68,7 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(simpheropol2);
         ticketManager.ticketRepository.save(vladivostok2);
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi");
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Vnukovo", "Sochi", Comparator.naturalOrder());
         Ticket[] expected = new Ticket[]{};
 
 
@@ -91,7 +94,7 @@ class TicketManagerTest {
         ticketManager.ticketRepository.save(simpheropol2);
         ticketManager.ticketRepository.save(vladivostok2);
 
-        Ticket[] actual = ticketManager.searchAllByFromAndTo("Domodedovo", "Sochi");
+        Ticket[] actual = ticketManager.searchAllByFromAndTo("Domodedovo", "Sochi", Comparator.naturalOrder());
         Ticket[] expected = new Ticket[]{sochi2};
 
 

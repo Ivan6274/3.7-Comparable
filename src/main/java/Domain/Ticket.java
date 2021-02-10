@@ -17,7 +17,7 @@ public class Ticket implements Comparable<Ticket> {
 
 
     public int compareTo(Ticket o) {
-        return this.coast - o.coast;
+        return this.timeFly - o.timeFly;
 
     }
 
