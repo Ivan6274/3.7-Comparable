@@ -1,20 +1,23 @@
 package Manager;
 
+import Domain.FlyTimeComrparator;
 import Domain.Ticket;
 import Repository.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 
 public class TicketManager {
     TicketRepository ticketRepository = new TicketRepository();
+
 
     public void add(Ticket item) {
         ticketRepository.save(item);
 
     }
 
-    public Ticket[] searchAllByFromAndTo(String from, String to) {
+    public Ticket[] searchAllByFromAndTo(String from, String to, Comparator comparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : ticketRepository.findAll()) {
             if (matches(ticket, from) && matches(ticket,to)) {
@@ -22,7 +25,8 @@ public class TicketManager {
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
-                Arrays.sort(result);
+                comparator = new FlyTimeComrparator();
+                Arrays.sort(result, comparator);
             }
 
 
